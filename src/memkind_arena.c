@@ -574,11 +574,11 @@ MEMKIND_EXPORT void *memkind_arena_realloc(struct memkind *kind, void *ptr,
             if (ptr == NULL) {
                 return jemk_mallocx_check(
                     size,
-                    MALLOCX_ARENA(arena) |
+                    MALLOCX_ALIGN(64) | MALLOCX_ARENA(arena) |
                         get_tcache_flag(kind->partition, size));
             } else {
                 ptr = jemk_rallocx(ptr, size,
-                                   MALLOCX_ARENA(arena) |
+                                   MALLOCX_ALIGN(64) | MALLOCX_ARENA(arena) |
                                        get_tcache_flag(kind->partition, size));
                 if (MEMKIND_UNLIKELY(!ptr))
                     errno = ENOMEM;
